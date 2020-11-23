@@ -1,0 +1,9 @@
+[Core]
+Name = Haikudetector
+Module = haikudetector
+
+[Documentation]
+Description = Detect haiku in response and eturn formatted haiku
+
+[Python]
+Version = 3
