@@ -30,7 +30,7 @@ class Haikudetector(BotPlugin):
         if syllable_count == 17 and mess.body.upper().replace(' ', '').find('FII') != -1:
             self.send_card(
                   in_reply_to=mess,
-                  body=line_1+'\n'+line_2+'\n'+line_3
+                  body=line_1+'\n'+line_2+'\n'+line_3,
                   title='You said a haiku!'
               )
 
