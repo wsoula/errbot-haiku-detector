@@ -31,7 +31,7 @@ class Haikudetector(BotPlugin):
             self.send_card(
                   in_reply_to=mess,
                   body=line_1+'\n'+line_2+'\n'+line_3,
-                  title='You said a haiku!'
+                  title='You might have said a haiku!'
               )
 
     @arg_botcmd('word', type=str)
