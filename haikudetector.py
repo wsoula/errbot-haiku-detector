@@ -27,7 +27,7 @@ class Haikudetector(BotPlugin):
             elif line_3_syllables + word_syllables <= 5 and line_1_syllables == 5 and line_2_syllables == 7:
                 line_3_syllables = line_3_syllables + word_syllables
                 line_3 = line_3 + ' ' + word
-        if syllable_count == 17 and mess.body.upper().replace(' ', '').find('FII') != -1:
+        if line_1_syllables == 5 and line_2_syllables == 7 and line_3_syllables == 5:
             self.send_card(
                   in_reply_to=mess,
                   body=line_1+'\n'+line_2+'\n'+line_3,
