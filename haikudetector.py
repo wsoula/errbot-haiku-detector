@@ -9,3 +9,7 @@ class Haikudetector(BotPlugin):
         """Runs on every message"""
         if syllables.estimate(mess.body) == 17 and mess.body.upper().replace(' ', '').find('FOO') != -1:
             return "You said a haiku"
+
+    @arg_botcmd('word', type=str)
+    def syllables(self, msg, word=None):
+        return syllables.estimate(word)
