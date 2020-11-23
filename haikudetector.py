@@ -7,7 +7,7 @@ class Haikudetector(BotPlugin):
     """Detects responses with haikus and returns a formatted haiku"""
     def callback_message(self, mess):
         """Runs on every message"""
-        body_array = mess.body.split(' ')
+        body_array = mess.body.replace('  ', ' ').split(' ')
         line_1 = ''
         line_1_syllables = 0
         line_2 = ''
@@ -15,7 +15,6 @@ class Haikudetector(BotPlugin):
         line_3 = ''
         line_3_syllables = 0
         syllable_count = 0
-        #logging.info(body_array)
         for word in body_array:
             word_syllables = syllables.estimate(word)
             syllable_count = syllable_count + word_syllables
@@ -31,7 +30,8 @@ class Haikudetector(BotPlugin):
         if syllable_count == 17 and mess.body.upper().replace(' ', '').find('FII') != -1:
             self.send_card(
                   in_reply_to=mess,
-                  body='You said a haikui\n'+line_1+'\n'+line_2+'\n'+line_3
+                  body=line_1+'\n'+line_2+'\n'+line_3
+                  title='You said a haiku!'
               )
 
     @arg_botcmd('word', type=str)
