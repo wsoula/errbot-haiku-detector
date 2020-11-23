@@ -1,6 +1,6 @@
 from errbot import BotPlugin, botcmd, arg_botcmd, re_botcmd
-import random
 import syllables
+import logging
 
 
 class Haikudetector(BotPlugin):
@@ -15,7 +15,7 @@ class Haikudetector(BotPlugin):
         line_3 = ''
         line_3_syllables = 0
         syllable_count = 0
-        print(body_array)
+        logging.info(body_array)
         for word in body_array:
             word_syllables = syllables.estimate(word)
             syllable_count = syllable_count + word_syllables
