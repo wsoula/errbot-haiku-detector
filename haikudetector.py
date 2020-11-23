@@ -15,7 +15,7 @@ class Haikudetector(BotPlugin):
         line_3 = ''
         line_3_syllables = 0
         syllable_count = 0
-        logging.info(body_array)
+        #logging.info(body_array)
         for word in body_array:
             word_syllables = syllables.estimate(word)
             syllable_count = syllable_count + word_syllables
@@ -29,7 +29,10 @@ class Haikudetector(BotPlugin):
                 line_3_syllables = line_3_syllables + word_syllables
                 line_3 = line_3 + ' ' + word
         if syllable_count == 17 and mess.body.upper().replace(' ', '').find('FII') != -1:
-            return 'You said a haikui\n'+line_1+'\n'+line_2+'\n'+line_3
+            self.send_card(
+                  in_reply_to=mess,
+                  body='You said a haikui\n'+line_1+'\n'+line_2+'\n'+line_3
+              )
 
     @arg_botcmd('word', type=str)
     def syllables(self, msg, word=None):
