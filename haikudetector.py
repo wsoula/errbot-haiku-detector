@@ -67,7 +67,7 @@ class Haikudetector(BotPlugin):
     def haiku(self, msg, args):
         """ Check if the passed sentence is a haiku and return it formatted """
         logger.info('args=%s msg=%s', args, msg)
-        haiku_pieces = self.haiku_check(' '.join(args))
+        haiku_pieces = self.haiku_check(args)
         logger.info('haiku_pieces=%s', haiku_pieces)
         if (haiku_pieces['syllable_count'] == 17 and haiku_pieces['line_1_syllables'] == 5 and
            haiku_pieces['line_2_syllables'] == 7 and haiku_pieces['line_3_syllables'] == 5):
