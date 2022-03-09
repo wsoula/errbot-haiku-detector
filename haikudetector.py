@@ -18,7 +18,7 @@ class Haikudetector(BotPlugin):
         """Runs on every message"""
         bot_prefix = os.getenv('BOT_PREFIX')
         if PREFIX == bot_prefix:
-            haiku_pieces = self.haiku_check(mess)
+            haiku_pieces = self.haiku_check(mess.body)
             if (haiku_pieces['syllable_count'] == 17 and haiku_pieces['line_1_syllables'] == 5 and
                haiku_pieces['line_2_syllables'] == 7 and haiku_pieces['line_3_syllables'] == 5):
                 haiku_text = haiku_pieces['line_1']+'\n'+haiku_pieces['line_2']+'\n'+haiku_pieces['line_3']
@@ -31,9 +31,9 @@ class Haikudetector(BotPlugin):
         else:
             logger.info('prefix=%s bot_prefix=%s not running haiku code', PREFIX, bot_prefix)
 
-    def haiku_check(self, mess):
+    def haiku_check(self, sentence):
         """ Check message and return formatted haiku """
-        body_array = mess.body.replace('  ', ' ').split(' ')
+        body_array = sentence.replace('  ', ' ').split(' ')
         line_1 = ''
         line_1_syllables = 0
         line_2 = ''
@@ -66,8 +66,8 @@ class Haikudetector(BotPlugin):
     @botcmd
     def haiku(self, msg, args):
         """ Check if the passed sentence is a haiku and return it formatted """
-        logger.info('args=%s', args)
-        haiku_pieces = self.haiku_check(msg)
+        logger.info('args=%s msg=%s', args, msg)
+        haiku_pieces = self.haiku_check(' '.join(args))
         logger.info('haiku_pieces=%s', haiku_pieces)
         if (haiku_pieces['syllable_count'] == 17 and haiku_pieces['line_1_syllables'] == 5 and
            haiku_pieces['line_2_syllables'] == 7 and haiku_pieces['line_3_syllables'] == 5):
