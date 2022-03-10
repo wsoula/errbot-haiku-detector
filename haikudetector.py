@@ -10,6 +10,7 @@ logger.setLevel(logging.INFO)
 MODE = os.getenv('MODE', 'reaction')  # 'reaction' for just an emoji, 'message' for a message to be sent, 'all' for all
 REACTION = os.getenv('REACTION', 'haiku')  # https://slackmojis.com/emojis/3545-haiku
 PREFIX = os.getenv('PREFIX', '!')  # Only run for one tobor, if you have multiple with different prefixes
+SEND_TO_ROOM = os.getenv('SEND_TO_ROOM', '#haikus')  # If no '#' in this variable then it won't send to a room
 
 
 class Haikudetector(BotPlugin):
@@ -28,6 +29,9 @@ class Haikudetector(BotPlugin):
                 if MODE in ['reaction', 'all']:
                     self._bot.add_reaction(mess, REACTION)
                     logger.info('haiku=%s', haiku_text)
+                    if '#' in SEND_TO_ROOM:
+                        user = self.build_identifier(SEND_TO_ROOM)
+                        self.send(user, haiku_text)
         else:
             logger.info('prefix=%s bot_prefix=%s not running haiku code', PREFIX, bot_prefix)
 
