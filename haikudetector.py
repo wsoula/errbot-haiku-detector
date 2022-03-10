@@ -31,7 +31,7 @@ class Haikudetector(BotPlugin):
                     logger.info('haiku=%s', haiku_text)
                     if '#' in SEND_TO_ROOM:
                         user = self.build_identifier(SEND_TO_ROOM)
-                        self.send(user, haiku_text+'\n - '+mess.frm)
+                        self.send(user, haiku_text+'\n - '+mess.frm.nick)
         else:
             logger.info('prefix=%s bot_prefix=%s not running haiku code', PREFIX, bot_prefix)
 
